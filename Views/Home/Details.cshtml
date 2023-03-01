@@ -1,0 +1,106 @@
+﻿@model WebApp.Controllers.ShowTable
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>T_wb_Poorder</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            供应商
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FCustNo)
+        </dd>
+        <dt class = "col-sm-2">
+            订单日期
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FDate)
+        </dd>
+        <dt class = "col-sm-2">
+            备注
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FRemark)
+        </dd>
+        <dt class = "col-sm-2">
+            单据编号
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FBillNo)
+        </dd>
+        @for (int item=0;item< Model.PoorderEntriesList.Count;item++)
+        {
+            var i =item+1;
+
+            <div>
+                <h8>购买商品:</h8>
+                <h8>
+                    @i
+                </h8>
+            </div>
+
+            <dt class = "col-sm-2">
+                物料代码
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.PoorderEntriesList[item].FItemNo)
+            </dd>
+            <dt class = "col-sm-2">
+                数量
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.PoorderEntriesList[item].FQty)
+            </dd>
+            <dt class="col-sm-2">
+                单价
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PoorderEntriesList[item].FPrice)
+            </dd>
+
+            <dt class="col-sm-2">
+                金额
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PoorderEntriesList[item].FAmount)
+            </dd>
+
+            <dt class = "col-sm-2">
+                    交货日期
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.PoorderEntriesList[item].FJHDate)
+            </dd>
+                <dt class = "col-sm-2">
+                    备注
+                </dt>
+                <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.PoorderEntriesList[item].FRemark)
+            </dd>
+
+            <dt class = "col-sm-2">
+                    内码
+                </dt>
+                <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.PoorderEntriesList[item].FID)
+            </dd>
+
+            <dt class = "col-sm-2">
+                    行号
+                </dt>
+                <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.PoorderEntriesList[item].FIndex)
+                </dd>
+        }
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.FID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

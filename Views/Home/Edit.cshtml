@@ -1,0 +1,100 @@
+﻿@model WebApp.Controllers.ShowTable
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>T_wb_Poorder</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FCustNo" class="control-label">供应商</label>
+                <input asp-for="FCustNo" class="form-control" />
+                <span asp-validation-for="FCustNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FDate" class="control-label">订单日期</label>
+                <input asp-for="FDate" class="form-control" />
+                <span asp-validation-for="FDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FRemark" class="control-label">备注</label>
+                <input asp-for="FRemark" class="form-control" />
+                <span asp-validation-for="FRemark" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="FID" />
+            <div class="form-group">
+                <label asp-for="FBillNo" class="control-label">单据编码</label>
+                <input asp-for="FBillNo" class="form-control" />
+                <span asp-validation-for="FBillNo" class="text-danger"></span>
+            </div>
+            @for (int i = 0; i < Model.PoorderEntriesList.Count; i++)
+            {
+                var j = i + 1;
+                <div>
+                    <span>购买商品</span>
+                    <span>@j</span>
+                </div>
+                                <div class="form-group">
+                    <label asp-for="PoorderEntriesList[i].FID" class="control-label">商品</label>
+                    <input asp-for="PoorderEntriesList[i].FID" class="form-control" />
+                    <span asp-validation-for="PoorderEntriesList[i].FID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PoorderEntriesList[i].FItemNo" class="control-label">商品</label>
+                    <input asp-for="PoorderEntriesList[i].FItemNo" class="form-control" />
+                    <span asp-validation-for="PoorderEntriesList[i].FItemNo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PoorderEntriesList[i].FQty" class="control-label">数量</label>
+                    <input asp-for="PoorderEntriesList[i].FQty" class="form-control" />
+                    <span asp-validation-for="PoorderEntriesList[i].FQty" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PoorderEntriesList[i].FPrice" class="control-label">单价</label>
+                    <input asp-for="PoorderEntriesList[i].FPrice" class="form-control" />
+                    <span asp-validation-for="PoorderEntriesList[i].FPrice" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PoorderEntriesList[i].FAmount" class="control-label">金额</label>
+                    <input asp-for="PoorderEntriesList[i].FAmount" class="form-control" />
+                    <span asp-validation-for="PoorderEntriesList[i].FAmount" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PoorderEntriesList[i].FJHDate" class="control-label">交货日期</label>
+                    <input asp-for="PoorderEntriesList[i].FJHDate" class="form-control" />
+                    <span asp-validation-for="PoorderEntriesList[i].FJHDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PoorderEntriesList[i].FRemark" class="control-label">备注</label>
+                    <input asp-for="PoorderEntriesList[i].FRemark" class="form-control" />
+                    <span asp-validation-for="PoorderEntriesList[i].FRemark" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PoorderEntriesList[i].FIndex" class="control-label">行号(若要删除商品将其改为0即可)</label>
+                    <input asp-for="PoorderEntriesList[i].FIndex" class="form-control" />
+                    <span asp-validation-for="PoorderEntriesList[i].FIndex" class="text-danger"></span>
+                </div>
+            }
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

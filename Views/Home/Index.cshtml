@@ -1,0 +1,97 @@
+﻿@model IEnumerable<WebApp.Controllers.ShowTable>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h1>Poorder and PoorderEntry</h1>
+
+<p><a asp-action="Create">Create New</a></p>
+<table class="table" cellpadding="1" cellspacing="1" border="1" >
+    <thead>
+        <tr>
+            <th rowspan="2" >
+                @*@Html.DisplayNameFor(model => model.FCustNo)*@
+                供应商
+            </th>
+            <th rowspan="2" >
+                @*@Html.DisplayNameFor(model => model.DateTime)*@
+                订单日期
+            </th>
+            <th rowspan="2" >
+                @*@Html.DisplayNameFor(model => model.FRemark)*@
+                备注
+            </th>
+            <th rowspan="2">
+                @*@Html.DisplayNameFor(model => model.FRemark)*@
+                单据编码
+            </th>
+            <th colspan="4" >
+                @*@Html.DisplayNameFor(model => model.FBillNo)*@
+                购买商品
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>物料代码</th>
+            <th>数量</th>
+            <th>单价</th>
+            <th>金额</th>
+            <th>交货日期</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            var j = item.PoorderEntriesList.Count>1?item.PoorderEntriesList.Count:1;
+            <tr>
+            <td rowspan="@j">
+                @Html.DisplayFor(modelItem => item.FCustNo)
+            </td>
+                <td rowspan="@j">
+                @Html.DisplayFor(modelItem => item.FDate)
+            </td>
+                <td rowspan="@j">
+                @Html.DisplayFor(modelItem => item.FRemark)
+            </td>
+                <td rowspan="@j">
+                @Html.DisplayFor(modelItem => item.FBillNo)
+            </td>
+                @if (item.PoorderEntriesList.Count >0)
+                {
+                        <td>@Html.DisplayFor(modelItem => item.PoorderEntriesList[0].FItemNo)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PoorderEntriesList[0].FQty)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PoorderEntriesList[0].FPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PoorderEntriesList[0].FAmount)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PoorderEntriesList[0].FJHDate)</td>
+                }
+                @if (item.PoorderEntriesList.Count ==0)
+                {
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                }
+                <td rowspan="@j">
+                <a asp-action="Edit" asp-route-id="@item.FID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.FID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.FID">Delete</a>
+            </td>
+        </tr>
+            @if (item.PoorderEntriesList.Count >1)
+            {
+                @for (int i = 1; i < item.PoorderEntriesList.Count; i++)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.PoorderEntriesList[i].FItemNo)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PoorderEntriesList[i].FQty)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PoorderEntriesList[i].FPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PoorderEntriesList[i].FAmount)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PoorderEntriesList[i].FJHDate)</td>
+                    </tr>
+                }
+            }
+}
+
+            </tbody>
+</table>
